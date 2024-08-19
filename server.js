@@ -24,20 +24,17 @@ app.post('/api/notes', (req, res) => {
         const newNote = {
             title,
             text,
-            review_id: uuidv4(),
+            note_id: uuidv4(),
         };
 
         fs.readFile('./db/db.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
-                // Convert string into JSON object
                 const parsedNotes = JSON.parse(data);
 
-                // Add a new review
                 parsedNotes.push(newNote);
 
-                // Write updated reviews back to the file
                 fs.writeFile(
                     './db/db.json',
                     JSON.stringify(parsedNotes, null, 4),
@@ -48,6 +45,7 @@ app.post('/api/notes', (req, res) => {
                 );
             }
         })
+        res.json(newNote);
     }
 });
 
