@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const path = require('path');
 const api = require('./db/db.json');
 const { v4: uuidv4 } = require('uuid');
@@ -43,7 +43,7 @@ app.post('/api/notes', (req, res) => {
                     (writeErr) =>
                         writeErr
                             ? console.error(writeErr)
-                            : console.info('Successfully updated reviews!')
+                            : console.info('Successfully updated notes!')
                 );
             }
         })
